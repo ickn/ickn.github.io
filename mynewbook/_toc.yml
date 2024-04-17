@@ -4,6 +4,19 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: linear-algebra/intro
+  sections:
+  - file: linear-algebra/vectors-and-matrices
+  - file: linear-algebra/linear-equations
+  - file: linear-algebra/subspaces
+  - file: linear-algebra/orthogonality
+  - file: linear-algebra/determinants.ipynb
+  - file: linear-algebra/eigenvalues
+  - file: linear-algebra/linear-transformations
+  - file: linear-algebra/svd
+- file: calculus/intro
+  sections:
+  - file: calculus/derivatives
+  - file: calculus/integrals
+  - file: calculus/series
+  - file: calculus/vector-calculus
