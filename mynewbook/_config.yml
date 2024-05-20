@@ -3,7 +3,7 @@
 
 title: Machine Learning Prep
 author: Nick Bray
-logo: ml-prep.png
+logo: logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
