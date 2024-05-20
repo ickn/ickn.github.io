@@ -1,6 +1,6 @@
-# Machine Learning Prep
+# Test Book
 
-The purpose of this site is to catalog training I used to prepare for a masters in machine learning.
+This is a test jupyter book online.
 
 ```{tableofcontents}
 ```

@@ -1,2 +1,2 @@
-# Calculus
+# Section 2
 
