@@ -1,60 +1,45 @@
 name: deploy-book
 
-# Run this when the master or main branch changes
 on:
   push:
-    branches:
-    - master
-    - main
-    # If your git repository has the Jupyter Book within some-subfolder next to
-    # unrelated files, you can make this run only if a file within that specific
-    # folder has been modified.
-    #
-    # paths:
-    # - some-subfolder/**
+    branches: [ master, main ]
 
-# This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
+      actions: read
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-    # Install dependencies
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.11
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Install dependencies
-      run: |
-        pip install -r mynewbook/requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r mynewbook/requirements.txt
 
-    # (optional) Cache your executed notebooks between runs
-    # if you have config:
-    # execute:
-    #   execute_notebooks: cache
-    - name: cache executed notebooks
-      uses: actions/cache@v3
-      with:
-        path: _build/.jupyter_cache
-        key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
+      - name: Cache executed notebooks
+        uses: actions/cache@v4
+        with:
+          path: mynewbook/_build/.jupyter_cache
+          key: jupyter-book-cache-${{ hashFiles('mynewbook/requirements.txt') }}
 
-    # Build the book
-    - name: Build the book
-      run: |
-        jupyter-book build mynewbook
+      - name: Build the book
+        run: |
+          jupyter-book build mynewbook
 
-    # Upload the book's HTML as an artifact
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v2
-      with:
-        path: "mynewbook/_build/html"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: mynewbook/_build/html
 
-    # Deploy the book's HTML to GitHub Pages
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
